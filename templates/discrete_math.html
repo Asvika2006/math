@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Discrete Mathematics Solver</h2>
+<form method="POST" action="/discrete-math">
+    <div class="mb-3">
+        <label class="form-label">Select Problem</label>
+        <select name="problem" class="form-select" required>
+            <option value="tower_of_hanoi">Tower of Hanoi</option>
+            <option value="eight_queens">Eight Queens Puzzle</option>
+            <option value="no_three_in_line">No-Three-in-Line Problem</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Enter Parameter (e.g., number of disks or grid size)</label>
+        <input type="text" name="parameter" class="form-control" required placeholder="Example: 3">
+    </div>
+    <button class="btn btn-success" type="submit">Solve</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong> {{ result }}
+</div>
+{% endif %}
+{% endblock %}

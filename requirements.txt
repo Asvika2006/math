@@ -1,0 +1,6 @@
+Flask
+sympy
+numpy
+scipy
+matplotlib
+pulp

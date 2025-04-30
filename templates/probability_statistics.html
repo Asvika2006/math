@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Probability and Statistics Calculator</h2>
+<form method="POST" action="/probability-statistics">
+    <div class="mb-3">
+        <label class="form-label">Enter Data (comma-separated)</label>
+        <input type="text" name="data" class="form-control" required placeholder="Example: 1,2,3,4,5">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Select Distribution</label>
+        <select name="distribution" class="form-select" required>
+            <option value="normal">Normal</option>
+            <option value="binomial">Binomial</option>
+            <option value="poisson">Poisson</option>
+        </select>
+    </div>
+    <button class="btn btn-success" type="submit">Calculate</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong>
+    <pre>{{ result }}</pre>
+</div>
+{% endif %}
+
+{% if plot_url %}
+<div class="mt-4">
+    <h4>Distribution Plot:</h4>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Distribution Plot">
+</div>
+{% endif %}
+{% endblock %}

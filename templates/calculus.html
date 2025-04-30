@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Calculus Solver</h2>
+<form method="POST" action="/calculus">
+    <div class="mb-3">
+        <label class="form-label">Enter an Expression (use x as variable)</label>
+        <input type="text" name="expression" class="form-control" required placeholder="Example: x**2 + 3*x + 2">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Select Operation</label>
+        <select name="operation" class="form-select" required>
+            <option value="derivative">Derivative</option>
+            <option value="integral">Integral</option>
+        </select>
+    </div>
+    <button class="btn btn-success" type="submit">Solve</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong> {{ result }}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Algebra Solver</h2>
+<form method="POST" action="/algebra">
+    <div class="mb-3">
+        <label class="form-label">Enter Equations (one per line)</label>
+        <textarea name="equations" class="form-control" rows="4" required placeholder="Example:\n2*x + y = 5\nx - 3*y = 7"></textarea>
+    </div>
+    <button class="btn btn-success" type="submit">Solve</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong>
+    <pre>{{ result }}</pre>
+</div>
+{% endif %}
+{% endblock %}

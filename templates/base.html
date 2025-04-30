@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Solver Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+    <a class="navbar-brand" >Math Solver Hub</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/calculus">Calculus</a></li>
+            <li class="nav-item"><a class="nav-link" href="/algebra">Algebra</a></li>
+            <li class="nav-item"><a class="nav-link" href="/number-theory">Number Theory</a></li>
+            <li class="nav-item"><a class="nav-link" href="/discrete-math">Discrete Math</a></li>
+            <li class="nav-item"><a class="nav-link" href="/random-process">Random Process</a></li>
+            <li class="nav-item"><a class="nav-link" href="/operations-research">Operations Research</a></li>
+            <li class="nav-item"><a class="nav-link" href="/probability-statistics">Probability and Statistics</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

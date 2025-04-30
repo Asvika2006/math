@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Random Process Simulator</h2>
+<form method="POST" action="/random-process">
+    <div class="mb-3">
+        <label class="form-label">Select Process Type</label>
+        <select name="process_type" class="form-select" required>
+            <option value="poisson">Poisson Process</option>
+            <option value="markov">Markov Chain</option>
+            <option value="random_walk">Random Walk</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Enter Number of Steps/Events</label>
+        <input type="text" name="parameter" class="form-control" required placeholder="Example: 100">
+    </div>
+    <button class="btn btn-success" type="submit">Simulate</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong>
+    <div>{{ result|safe }}</div>
+</div>
+{% endif %}
+{% endblock %}

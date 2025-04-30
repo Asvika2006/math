@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Operations Research Solver</h2>
+<form method="POST" action="/operations-research">
+    <div class="mb-3">
+        <label class="form-label">Select Problem Type</label>
+        <select name="problem_type" class="form-select" required>
+            <option value="lp">Linear Programming</option>
+            <option value="ip">Integer Programming</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Objective Function (in terms of x and y)</label>
+        <input type="text" name="objective" class="form-control" required placeholder="Example: 3*x + 2*y">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Constraints (one per line)</label>
+        <textarea name="constraints" class="form-control" rows="4" required placeholder="Example:\nx + y <= 4\nx - y >= 1"></textarea>
+    </div>
+    <button class="btn btn-success" type="submit">Solve</button>
+</form>
+
+{% if result %}
+<div class="alert alert-info mt-4">
+    <strong>Result:</strong>
+    <pre>{{ result }}</pre>
+</div>
+{% endif %}
+{% endblock %}
