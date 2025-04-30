@@ -1,5 +1,188 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Welcome to Mathematics Problem Solver Hub</h1>
-<p>Choose a category from the navigation bar to start solving!</p>
+<!-- Hero Section -->
+<section class="py-5 text-center">
+    <div class="row py-lg-5">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h1 class="fw-bold mb-3">Solve Any Math Problem with MathIntel</h1>
+            <p class="lead text-muted mb-4">Your intelligent calculator for advanced mathematics. Get step-by-step solutions for calculus, algebra, statistics, and more.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="#subject-cards" class="btn btn-primary btn-lg px-4 gap-3">Get Started</a>
+                <a href="/tools" class="btn btn-outline-secondary btn-lg px-4">Explore Tools</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Subject Cards Section -->
+<h2 class="text-center mb-4" id="subject-cards">Explore Math Subjects</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Calculus Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-integral"></i>
+                </div>
+                <h3 class="card-title">Calculus</h3>
+                <p class="card-text">Tackle derivatives, integrals, limits, and differential equations with step-by-step solutions.</p>
+                <a href="/calculus" class="btn btn-primary">Solve Calculus</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Algebra Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-superscript"></i>
+                </div>
+                <h3 class="card-title">Algebra</h3>
+                <p class="card-text">Solve equations, systems, matrices, and polynomial problems with detailed explanations.</p>
+                <a href="/algebra" class="btn btn-primary">Solve Algebra</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Number Theory Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-stream"></i>
+                </div>
+                <h3 class="card-title">Number Theory</h3>
+                <p class="card-text">Explore prime numbers, modular arithmetic, and number theoretic functions.</p>
+                <a href="/number-theory" class="btn btn-primary">Solve Number Theory</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Discrete Math Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 class="card-title">Discrete Math</h3>
+                <p class="card-text">Work with logic, sets, graphs, combinatorics, and algorithmic problems.</p>
+                <a href="/discrete-math" class="btn btn-primary">Solve Discrete Math</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Random Process Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-random"></i>
+                </div>
+                <h3 class="card-title">Random Process</h3>
+                <p class="card-text">Analyze stochastic processes, Markov chains, and random variables.</p>
+                <a href="/random-process" class="btn btn-primary">Solve Random Process</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Operations Research Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h3 class="card-title">Operations Research</h3>
+                <p class="card-text">Optimize with linear programming, network flows, and decision analysis.</p>
+                <a href="/operations-research" class="btn btn-primary">Solve Operations Research</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Probability & Statistics Card -->
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="card-title">Probability & Statistics</h3>
+                <p class="card-text">Calculate probabilities, analyze datasets, and perform statistical tests.</p>
+                <a href="/probability-statistics" class="btn btn-primary">Solve Statistics</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Featured Tool Card -->
+    <div class="col">
+        <div class="card h-100 bg-light">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="card-title">Advanced Calculator</h3>
+                <p class="card-text">All-in-one calculator with scientific, graphing, and matrix capabilities.</p>
+                <a href="/tools" class="btn btn-primary">Launch Calculator</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Math Editor Card -->
+    <div class="col">
+        <div class="card h-100 bg-light">
+            <div class="card-body text-center">
+                <div class="subject-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <h3 class="card-title">Math Editor</h3>
+                <p class="card-text">Create and edit mathematical expressions with an intuitive equation editor.</p>
+                <a href="/tools" class="btn btn-primary">Open Editor</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 mt-3 bg-light rounded">
+    <div class="container">
+        <h2 class="text-center mb-4">Why Choose MathIntel?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-start">
+                    <div class="me-3">
+                        <i class="fas fa-check-circle text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h4>Step-by-Step Solutions</h4>
+                        <p>Get detailed explanations for every step of the problem-solving process.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-start">
+                    <div class="me-3">
+                        <i class="fas fa-bolt text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h4>Advanced Algorithms</h4>
+                        <p>Powered by cutting-edge mathematical algorithms for accurate solutions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex align-items-start">
+                    <div class="me-3">
+                        <i class="fas fa-book-open text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h4>Learning-Focused</h4>
+                        <p>Designed to help you understand concepts, not just get answers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+        <!-- Calculator Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0"><i class="fas fa-calculator me-2"></i>Scientific Calculator</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="calculator-form">
+                    <div class="input-group mb-3">
+                        <input type="text" id="expression" name="expression" class="form-control form-control-lg" 
+                               placeholder="Enter expression (e.g. sin(1), log(10), 2+2)" 
+                               autocomplete="off" autofocus required>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-equals"></i> Calculate
+                        </button>
+                    </div>
+                    
+                    {% if result != '' %}
+                    <div class="alert alert-success mb-4" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <div>
+                                <h5 class="alert-heading mb-1">Result</h5>
+                                <p class="mb-0 fs-4">{{ result }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Calculator Keypad -->
+                    <div class="calculator-keypad">
+                        <!-- Basic Operations -->
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="7">7</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="8">8</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="9">9</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-secondary calc-btn w-100" data-value="/">÷</button>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="4">4</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="5">5</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="6">6</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-secondary calc-btn w-100" data-value="*">×</button>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="1">1</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="2">2</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="3">3</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-secondary calc-btn w-100" data-value="-">−</button>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value="0">0</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-light calc-btn w-100" data-value=".">.</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-success calc-btn w-100" data-value="=">=</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-secondary calc-btn w-100" data-value="+">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Scientific Operations -->
+                        <div class="row g-2 mb-2">
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="sin(">sin</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="cos(">cos</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="tan(">tan</button>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="log(">log</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="ln(">ln</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="sqrt(">√</button>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-2">
+                            <div class="col-3">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="(">(</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value=")">)</button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-info calc-btn w-100" data-value="^">x<sup>y</sup></button>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" class="btn btn-danger calc-btn w-100" id="clear-btn">C</button>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <button type="button" class="btn btn-warning calc-btn w-100" data-value="pi">π</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-warning calc-btn w-100" data-value="e">e</button>
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="btn btn-warning calc-btn w-100" data-value="%">%</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Help Card -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h3 class="mb-0"><i class="fas fa-question-circle me-2"></i>Calculator Help</h3>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="calculatorHelp">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                Basic Operations
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#calculatorHelp">
+                            <div class="accordion-body">
+                                <ul class="mb-0">
+                                    <li><strong>Addition:</strong> Use + (e.g., <code>2+2</code>)</li>
+                                    <li><strong>Subtraction:</strong> Use - (e.g., <code>5-3</code>)</li>
+                                    <li><strong>Multiplication:</strong> Use * (e.g., <code>4*3</code>)</li>
+                                    <li><strong>Division:</strong> Use / (e.g., <code>10/2</code>)</li>
+                                    <li><strong>Exponentiation:</strong> Use ^ (e.g., <code>2^3</code>)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                Scientific Functions
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#calculatorHelp">
+                            <div class="accordion-body">
+                                <ul class="mb-0">
+                                    <li><strong>Trigonometric:</strong> sin(x), cos(x), tan(x)</li>
+                                    <li><strong>Inverse Trig:</strong> asin(x), acos(x), atan(x)</li>
+                                    <li><strong>Logarithmic:</strong> log(x) (base 10), ln(x) (natural log)</li>
+                                    <li><strong>Square Root:</strong> sqrt(x)</li>
+                                    <li><strong>Constants:</strong> pi (π), e</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                Tips & Examples
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#calculatorHelp">
+                            <div class="accordion-body">
+                                <p>Example expressions:</p>
+                                <ul class="mb-0">
+                                    <li><code>sin(pi/2)</code> - Sine of 90 degrees</li>
+                                    <li><code>2*pi*5</code> - Circumference of circle with radius 5</li>
+                                    <li><code>log(1000)/log(10)</code> - Logarithm base 10 of 1000</li>
+                                    <li><code>sqrt(16) + 2^3</code> - Square root of 16 plus 2 cubed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Tools Section -->
+    <div class="col-lg-4 col-md-10 mt-4 mt-lg-0">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-tools me-2"></i>Related Tools</h3>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="/tools/graphing-calculator" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="fas fa-chart-line text-primary me-3"></i>
+                    <div>
+                        <h5 class="mb-1">Graphing Calculator</h5>
+                        <p class="mb-0 small text-muted">Plot and analyze functions visually</p>
+                    </div>
+                </a>
+                <a href="/tools/matrix-calculator" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="fas fa-table text-primary me-3"></i>
+                    <div>
+                        <h5 class="mb-1">Matrix Calculator</h5>
+                        <p class="mb-0 small text-muted">Perform operations on matrices</p>
+                    </div>
+                </a>
+                <a href="/tools/equation-solver" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="fas fa-equals text-primary me-3"></i>
+                    <div>
+                        <h5 class="mb-1">Equation Solver</h5>
+                        <p class="mb-0 small text-muted">Solve complex equations step by step</p>
+                    </div>
+                </a>
+                <a href="/tools/unit-converter" class="list-group-item list-group-item-action d-flex align-items-center">
+                    <i class="fas fa-exchange-alt text-primary me-3"></i>
+                    <div>
+                        <h5 class="mb-1">Unit Converter</h5>
+                        <p class="mb-0 small text-muted">Convert between different units of measurement</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Popular Calculations -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="fas fa-star me-2"></i>Popular Calculations</h3>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action calc-example" data-expr="2*pi*r">
+                    <h5 class="mb-1">Circumference of a Circle</h5>
+                    <p class="mb-0 small text-muted">Enter radius value for r</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action calc-example" data-expr="sqrt(a^2 + b^2)">
+                    <h5 class="mb-1">Pythagorean Theorem</h5>
+                    <p class="mb-0 small text-muted">Enter values for sides a and b</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action calc-example" data-expr="(a+b+c)/3">
+                    <h5 class="mb-1">Arithmetic Mean</h5>
+                    <p class="mb-0 small text-muted">Enter values a, b, and c</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action calc-example" data-expr="log(x)/log(2)">
+                    <h5 class="mb-1">Logarithm Base 2</h5>
+                    <p class="mb-0 small text-muted">Enter value for x</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Calculator specific styles */
+    .calculator-keypad {
+        margin-top: 1.5rem;
+    }
+    
+    .calc-btn {
+        height: 48px;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .calc-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .calc-btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    #expression {
+        font-family: 'Courier New', monospace;
+        font-size: 1.3rem;
+    }
+    
+    .list-group-item-action {
+        transition: all 0.2s;
+    }
+    
+    .list-group-item-action:hover {
+        background-color: #f8f9fa;
+    }
+    
+    @media (max-width: 576px) {
+        .calc-btn {
+            height: 42px;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const expressionInput = document.getElementById('expression');
+        const calculatorForm = document.getElementById('calculator-form');
+        const calculationHistory = document.getElementById('calculation-history');
+        const clearBtn = document.getElementById('clear-btn');
+        
+        // Handle calculator button clicks
+        document.querySelectorAll('.calc-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                
+                if (value === '=') {
+                    calculatorForm.submit();
+                } else if (this.id === 'clear-btn') {
+                    expressionInput.value = '';
+                    expressionInput.focus();
+                } else {
+                    // Insert at cursor position
+                    const startPos = expressionInput.selectionStart;
+                    const endPos = expressionInput.selectionEnd;
+                    const currentValue = expressionInput.value;
+                    
+                    let newValue;
+                    if (value === 'pi') {
+                        newValue = currentValue.substring(0, startPos) + 'π' + currentValue.substring(endPos);
+                    } else if (value === 'sqrt(') {
+                        newValue = currentValue.substring(0, startPos) + 'sqrt(' + currentValue.substring(endPos) + ')';
+                    } else {
+                        newValue = currentValue.substring(0, startPos) + value + currentValue.substring(endPos);
+                    }
+                    
+                    expressionInput.value = newValue;
+                    
+                    // Set cursor position
+                    if (value === 'sqrt(') {
+                        expressionInput.selectionStart = expressionInput.selectionEnd = startPos + value.length;
+                    } else {
+                        expressionInput.selectionStart = expressionInput.selectionEnd = startPos + value.length;
+                    }
+                    
+                    expressionInput.focus();
+                }
+            });
+        });
+        
+        // Handle popular calculation examples
+        document.querySelectorAll('.calc-example').forEach(example => {
+            example.addEventListener('click', function(e) {
+                e.preventDefault();
+                expressionInput.value = this.getAttribute('data-expr');
+                expressionInput.focus();
+            });
+        });
+        
+        // Optional: Add keyboard support
+        expressionInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                calculatorForm.submit();
+            }
+        });
+        
+        // Optional: Save calculation history to localStorage
+        if (typeof Storage !== "undefined") {
+            // Add current calculation to history if result exists
+            {% if result != '' %}
+                const calculation = {
+                    expression: "{{ request.form.get('expression', '') }}",
+                    result: "{{ result }}",
+                    timestamp: new Date().toISOString()
+                };
+                
+                let history = JSON.parse(localStorage.getItem('calculationHistory')) || [];
+                history.unshift(calculation);
+                
+                // Keep only last 10 calculations
+                if (history.length > 10) {
+                    history = history.slice(0, 10);
+                }
+                
+                localStorage.setItem('calculationHistory', JSON.stringify(history));
+            {% endif %}
+        }
+    });
+</script>
+{% endblock %}
